@@ -17,12 +17,24 @@ public class OntClassServiceImpl implements OntClassService {
 
     @Override
     public List<Map<String, Object>> getRootClasses() {
+        System.out.println("[OntClassServiceImpl] 开始获取根类...");
         List<Map<String, Object>> list = new ArrayList<>();
-        for (OntClass rootClass : ontClassDao.getRootClasses()) {
-            Map<String, Object> map = new HashMap<>();
-            map.put("name", rootClass.getLocalName());
-            map.put("hasSubClasses", rootClass.hasSubClass());
-            list.add(map);
+        try {
+            List<OntClass> rootClasses = ontClassDao.getRootClasses();
+            System.out.println("[OntClassServiceImpl] 从DAO获取根类数量: " + (rootClasses != null ? rootClasses.size() : "null"));
+            if (rootClasses != null) {
+                for (OntClass rootClass : rootClasses) {
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("name", rootClass.getLocalName());
+                    map.put("hasSubClasses", rootClass.hasSubClass());
+                    list.add(map);
+                    System.out.println("[OntClassServiceImpl] 添加根类: " + rootClass.getLocalName());
+                }
+            }
+            System.out.println("[OntClassServiceImpl] 返回根类总数: " + list.size());
+        } catch (Exception e) {
+            System.err.println("[OntClassServiceImpl] 获取根类异常: " + e.getMessage());
+            e.printStackTrace();
         }
         return list;
     }

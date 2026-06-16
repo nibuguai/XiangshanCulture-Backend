@@ -70,7 +70,7 @@ public class AdminController {
                 // 登陆成功
                 String token = JWTUtil.getJwtToken(checkUser.getUserName());
                 Cookie cookie = new Cookie("access_token", token);
-                cookie.setDomain("localhost");
+                //cookie.setDomain("localhost");
                 cookie.setPath("/");
                 cookie.setHttpOnly(true);
                 cookie.setMaxAge(3*24*60*60);

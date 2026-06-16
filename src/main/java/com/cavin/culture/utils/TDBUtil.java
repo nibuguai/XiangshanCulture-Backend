@@ -25,12 +25,9 @@ public class TDBUtil {
     public static Set<String> urls;
 
     static {
-        try {
-            owlPath = URLDecoder.decode("file:" + TDBUtil.class.getClassLoader().getResource("static").getPath() + File.separator + "owl" + File.separator,"utf-8");
-            tdbDirectory = URLDecoder.decode(TDBUtil.class.getClassLoader().getResource("static").getPath() + File.separator + "tdb","utf-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+        owlPath = "static/owl/";   // classpath 相对路径，读资源用
+
+        tdbDirectory = System.getenv().getOrDefault("TDB_PATH", "./tdb");
     }
 
     public static Dataset getDataSet() {
@@ -89,10 +86,25 @@ public class TDBUtil {
         Dataset ds = null;
         OntModel ontModel = null;
         try {
+            System.out.println("[TDBUtil] TDB目录: " + tdbDirectory);
+            System.out.println("[TDBUtil] 推理模型URI: " + TDBUtil.inferredNamedModel);
             ds = TDBFactory.createDataset(tdbDirectory);
+            System.out.println("[TDBUtil] Dataset创建成功: " + (ds != null));
             ds.begin(ReadWrite.READ);
-            ontModel = ModelFactory.createOntologyModel(OntModelSpec.OWL_MEM, ds.getNamedModel(TDBUtil.inferredNamedModel));
+            Model model = ds.getNamedModel(TDBUtil.inferredNamedModel);
+            System.out.println("[TDBUtil] Model获取成功: " + (model != null));
+            if (model != null) {
+                System.out.println("[TDBUtil] Model大小: " + model.size());
+            }
+            ontModel = ModelFactory.createOntologyModel(OntModelSpec.OWL_MEM, model);
+            System.out.println("[TDBUtil] OntModel创建成功: " + (ontModel != null));
+            if (ontModel != null) {
+                System.out.println("[TDBUtil] OntModel大小: " + ontModel.size());
+            }
             ds.end();
+        } catch (Exception e) {
+            System.err.println("[TDBUtil] 获取OntModel异常: " + e.getMessage());
+            e.printStackTrace();
         } finally {
             if (ds != null) {
                 ds.close();

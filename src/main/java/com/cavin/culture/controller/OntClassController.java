@@ -22,8 +22,16 @@ public class OntClassController {
     @RequestMapping(value = "/getRootClasses", method = RequestMethod.GET)
     @ResponseBody
     public JsonMessage getRootClasses() {
-        List<Map<String, Object>> list = ontClassService.getRootClasses();
-        return JsonMessage.success().addData("rootClasses", list);
+        System.out.println("[OntClassController] 收到getRootClasses请求");
+        try {
+            List<Map<String, Object>> list = ontClassService.getRootClasses();
+            System.out.println("[OntClassController] 获取根类数量: " + (list != null ? list.size() : "null"));
+            return JsonMessage.success().addData("rootClasses", list);
+        } catch (Exception e) {
+            System.err.println("[OntClassController] 获取根类异常: " + e.getMessage());
+            e.printStackTrace();
+            return JsonMessage.error(500, "获取根类失败: " + e.getMessage());
+        }
     }
 
     @RequestMapping(value = "/getSubClasses", method = RequestMethod.GET)

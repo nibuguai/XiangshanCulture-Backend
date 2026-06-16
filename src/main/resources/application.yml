@@ -7,7 +7,7 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://mysql:3306/culture?useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://192.168.61.147:3306/culture?useSSL=false&serverTimezone=UTC
     type: com.alibaba.druid.pool.DruidDataSource
 
     # 数据源其他配置
