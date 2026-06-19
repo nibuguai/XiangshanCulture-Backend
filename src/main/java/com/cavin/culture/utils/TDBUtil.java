@@ -19,8 +19,8 @@ import java.util.Set;
 public class TDBUtil {
 
     public static String tdbDirectory;
-    public static final String defaultNamedModel = "http://www.owl-ontologies.com/culture";
-    public static final String inferredNamedModel = "http://www.owl-ontologies.com/cultureInferred";
+    public static final String defaultNamedModel = "http://www.owl-ontologies.com/BeijingRevolution";
+    public static final String inferredNamedModel = "http://www.owl-ontologies.com/BeijingRevolutionInferred";
     public static String owlPath;
     public static Set<String> urls;
 
@@ -115,17 +115,7 @@ public class TDBUtil {
 
     public static Set<String> getURIs() {
         Set<String> set = new HashSet<>();
-        set.add("http://www.owl-ontologies.com/Individual.owl");
-        set.add("http://www.owl-ontologies.com/Event.owl");
-        set.add("http://www.owl-ontologies.com/Location.owl");
-        set.add("http://www.owl-ontologies.com/Think.owl");
-        set.add("http://www.owl-ontologies.com/Relics.owl");
-        set.add("http://www.owl-ontologies.com/Localism.owl");
-        set.add("http://www.owl-ontologies.com/Time.owl");
-        set.add("http://www.owl-ontologies.com/Folk.owl");
-        set.add("http://www.owl-ontologies.com/Organization.owl");
-        set.add("http://www.owl-ontologies.com/Duty_Title.owl");
-        set.add("http://www.owl-ontologies.com/Art.owl");
+        set.add("http://www.owl-ontologies.com/RevolutionaryRelics.owl");
         return set;
     }
 

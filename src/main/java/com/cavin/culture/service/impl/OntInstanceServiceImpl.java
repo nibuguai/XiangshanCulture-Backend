@@ -209,23 +209,45 @@ public class OntInstanceServiceImpl implements OntInstanceService {
                         Map<String, String> map = new HashMap<>();
                         if (!statement.getPredicate().getLocalName().equals("type")) {
                             // 宾语的name及category
-                            OntClass ontClass = TDBUtil.getInferredOntModel().getIndividual(statement.getObject().asResource().getURI()).getOntClass();
-                            while (ontClass.hasSuperClass()){
-                                ontClass = ontClass.getSuperClass();
+                            Individual objIndividual = TDBUtil.getInferredOntModel().getIndividual(statement.getObject().asResource().getURI());
+                            if (objIndividual != null) {
+                                OntClass ontClass = objIndividual.getOntClass();
+                                if (ontClass != null) {
+                                    while (ontClass.hasSuperClass()){
+                                        OntClass superClass = ontClass.getSuperClass();
+                                        if (superClass == null) break;
+                                        ontClass = superClass;
+                                    }
+                                    map.put("name", statement.getObject().asResource().getLocalName());
+                                    map.put("category", ontClass.getLocalName());
+                                } else {
+                                    map.put("name", statement.getObject().asResource().getLocalName());
+                                    map.put("category", "未知类型");
+                                }
+                            } else {
+                                map.put("name", statement.getObject().asResource().getLocalName());
+                                map.put("category", "未知类型");
                             }
-                            map.put("name", statement.getObject().asResource().getLocalName());
-                            map.put("category", ontClass.getLocalName());
                             duplicateList.add(statement.getObject().asResource().getLocalName());
                             list.add(map);
                         } else {
                             // 主语的name及category
                             OntClass ontClass = TDBUtil.getInferredOntModel().getOntClass(statement.getObject().asResource().getURI());
-                            while (ontClass.hasSuperClass()){
-                                ontClass = ontClass.getSuperClass();
+                            if (ontClass != null) {
+                                while (ontClass.hasSuperClass()){
+                                    OntClass superClass = ontClass.getSuperClass();
+                                    if (superClass == null) break;
+                                    ontClass = superClass;
+                                }
+                                map.put("name", statement.getSubject().getLocalName());
+                                map.put("category", ontClass.getLocalName());
+                                list.add(0, map);
+                            } else {
+                                // 如果获取不到类，使用type的本地名作为category
+                                map.put("name", statement.getSubject().getLocalName());
+                                map.put("category", statement.getObject().asResource().getLocalName());
+                                list.add(0, map);
                             }
-                            map.put("name", statement.getSubject().getLocalName());
-                            map.put("category", ontClass.getLocalName());
-                            list.add(0, map);
                         }
                     }
 

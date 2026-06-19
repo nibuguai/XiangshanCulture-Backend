@@ -44,7 +44,12 @@ public class OntClassDaoImpl implements OntClassDao {
                 OntClass ontClass = classIterator.next();
                 if ( !ontClass.isAnon() ) {
                     System.out.println("[OntClassDaoImpl] 找到根类: " + ontClass.getLocalName() + " URI: " + ontClass.getURI());
-                    list.add(ontClass);
+                    // 过滤掉顶层的"革命文物"类，只保留其子类作为根类
+                    if (!ontClass.getLocalName().equals("革命文物")) {
+                        list.add(ontClass);
+                    } else {
+                        System.out.println("[OntClassDaoImpl] 跳过顶层类: 革命文物");
+                    }
                 }
             }
             System.out.println("[OntClassDaoImpl] 根类总数: " + list.size());
