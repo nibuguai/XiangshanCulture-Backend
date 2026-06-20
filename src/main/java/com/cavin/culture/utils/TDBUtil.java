@@ -116,6 +116,7 @@ public class TDBUtil {
     public static Set<String> getURIs() {
         Set<String> set = new HashSet<>();
         set.add("http://www.owl-ontologies.com/RevolutionaryRelics.owl");
+        set.add("http://www.owl-ontologies.com/BeijingRevolution.owl");
         return set;
     }
 

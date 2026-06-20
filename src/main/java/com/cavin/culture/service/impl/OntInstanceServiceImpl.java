@@ -12,6 +12,7 @@ import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
 import org.apache.jena.util.iterator.ExtendedIterator;
+import org.apache.jena.vocabulary.RDF;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -123,11 +124,10 @@ public class OntInstanceServiceImpl implements OntInstanceService {
             while (stmtIterator.hasNext()) {
                 Statement statement = stmtIterator.nextStatement();
                 if (statement.getPredicate().getLocalName().equals("type")) {
-                    OntClass ontClass = TDBUtil.getInferredOntModel().getOntClass(statement.getObject().asResource().getURI());
-                    while ( ontClass.hasSuperClass() ) {
-                        ontClass = ontClass.getSuperClass();
+                    String typeName = statement.getObject().asResource().getLocalName();
+                    if (!typeName.equals("NamedIndividual")) {
+                        classType = typeName;
                     }
-                    classType = ontClass.getLocalName();
                     continue;
                 }
                 if (statement.getObject().isResource()) {
@@ -169,6 +169,9 @@ public class OntInstanceServiceImpl implements OntInstanceService {
         }
         if (individual != null){
             List<Triple> list = new ArrayList<>();
+            List<String> processedPairs = new ArrayList<>();
+
+            // 获取当前实例作为主语的关系
             StmtIterator stmtIterator = ontInstanceDao.getStatementsByInstance(individual);
             while (stmtIterator.hasNext()) {
                 Statement statement = stmtIterator.nextStatement();
@@ -176,10 +179,40 @@ public class OntInstanceServiceImpl implements OntInstanceService {
                     continue;
                 }
                 if (statement.getObject().isResource()) {
-                    Triple triple = new Triple(statement.getSubject().getLocalName(), statement.getPredicate().getLocalName(), statement.getObject().asResource().getLocalName());
-                    list.add(triple);
+                    String subject = statement.getSubject().getLocalName();
+                    String predicate = statement.getPredicate().getLocalName();
+                    String object = statement.getObject().asResource().getLocalName();
+                    String pairKey = subject + "-" + predicate + "-" + object;
+
+                    if (!processedPairs.contains(pairKey)) {
+                        Triple triple = new Triple(subject, predicate, object);
+                        list.add(triple);
+                        processedPairs.add(pairKey);
+                    }
                 }
             }
+
+            // 获取当前实例作为宾语的关系（反向关系）
+            StmtIterator allStmts = TDBUtil.getInferredOntModel().listStatements();
+            while (allStmts.hasNext()) {
+                Statement statement = allStmts.nextStatement();
+                if (statement.getObject().isResource() &&
+                    statement.getObject().asResource().getLocalName().equals(individualName) &&
+                    !statement.getPredicate().getLocalName().equals("type")) {
+
+                    String subject = statement.getSubject().getLocalName();
+                    String predicate = statement.getPredicate().getLocalName();
+                    String object = individualName;
+                    String pairKey = subject + "-" + predicate + "-" + object;
+
+                    if (!processedPairs.contains(pairKey)) {
+                        Triple triple = new Triple(subject, predicate, object);
+                        list.add(triple);
+                        processedPairs.add(pairKey);
+                    }
+                }
+            }
+
             return list;
         } else {
             // error
@@ -201,6 +234,28 @@ public class OntInstanceServiceImpl implements OntInstanceService {
         if (individual != null){
             List<Map<String, String>> list = new ArrayList<>();
             List<String> duplicateList = new ArrayList<>();
+
+            // 添加当前实例自身
+            Map<String, String> selfMap = new HashMap<>();
+            selfMap.put("name", individualName);
+            // 从rdf:type语句获取类型
+            String selfCategory = "未知类型";
+            StmtIterator typeStmts = individual.listProperties(RDF.type);
+            while (typeStmts.hasNext()) {
+                Statement typeStmt = typeStmts.next();
+                if (typeStmt.getObject().isResource()) {
+                    String typeName = typeStmt.getObject().asResource().getLocalName();
+                    if (!typeName.equals("NamedIndividual")) {
+                        selfCategory = typeName;
+                        break;
+                    }
+                }
+            }
+            selfMap.put("category", selfCategory);
+            list.add(selfMap);
+            duplicateList.add(individualName);
+
+            // 获取当前实例作为主语的关系
             StmtIterator stmtIterator = ontInstanceDao.getStatementsByInstance(individual);
             while (stmtIterator.hasNext()) {
                 Statement statement = stmtIterator.nextStatement();
@@ -210,49 +265,69 @@ public class OntInstanceServiceImpl implements OntInstanceService {
                         if (!statement.getPredicate().getLocalName().equals("type")) {
                             // 宾语的name及category
                             Individual objIndividual = TDBUtil.getInferredOntModel().getIndividual(statement.getObject().asResource().getURI());
+                            map.put("name", statement.getObject().asResource().getLocalName());
                             if (objIndividual != null) {
-                                OntClass ontClass = objIndividual.getOntClass();
-                                if (ontClass != null) {
-                                    while (ontClass.hasSuperClass()){
-                                        OntClass superClass = ontClass.getSuperClass();
-                                        if (superClass == null) break;
-                                        ontClass = superClass;
+                                // 从rdf:type语句获取类型
+                                String objCategory = "未知类型";
+                                StmtIterator objTypeStmts = objIndividual.listProperties(RDF.type);
+                                while (objTypeStmts.hasNext()) {
+                                    Statement typeStmt = objTypeStmts.next();
+                                    if (typeStmt.getObject().isResource()) {
+                                        String typeName = typeStmt.getObject().asResource().getLocalName();
+                                        if (!typeName.equals("NamedIndividual")) {
+                                            objCategory = typeName;
+                                            break;
+                                        }
                                     }
-                                    map.put("name", statement.getObject().asResource().getLocalName());
-                                    map.put("category", ontClass.getLocalName());
-                                } else {
-                                    map.put("name", statement.getObject().asResource().getLocalName());
-                                    map.put("category", "未知类型");
                                 }
+                                map.put("category", objCategory);
                             } else {
-                                map.put("name", statement.getObject().asResource().getLocalName());
                                 map.put("category", "未知类型");
                             }
                             duplicateList.add(statement.getObject().asResource().getLocalName());
                             list.add(map);
-                        } else {
-                            // 主语的name及category
-                            OntClass ontClass = TDBUtil.getInferredOntModel().getOntClass(statement.getObject().asResource().getURI());
-                            if (ontClass != null) {
-                                while (ontClass.hasSuperClass()){
-                                    OntClass superClass = ontClass.getSuperClass();
-                                    if (superClass == null) break;
-                                    ontClass = superClass;
-                                }
-                                map.put("name", statement.getSubject().getLocalName());
-                                map.put("category", ontClass.getLocalName());
-                                list.add(0, map);
-                            } else {
-                                // 如果获取不到类，使用type的本地名作为category
-                                map.put("name", statement.getSubject().getLocalName());
-                                map.put("category", statement.getObject().asResource().getLocalName());
-                                list.add(0, map);
-                            }
                         }
                     }
-
                 }
             }
+
+            // 获取当前实例作为宾语的关系（反向关系）
+            StmtIterator allStmts = TDBUtil.getInferredOntModel().listStatements();
+            while (allStmts.hasNext()) {
+                Statement statement = allStmts.nextStatement();
+                if (statement.getObject().isResource() &&
+                    statement.getObject().asResource().getLocalName().equals(individualName) &&
+                    !statement.getPredicate().getLocalName().equals("type")) {
+
+                    String subjectName = statement.getSubject().getLocalName();
+                    if (!duplicateList.contains(subjectName)) {
+                        Map<String, String> map = new HashMap<>();
+                        Individual subjIndividual = TDBUtil.getInferredOntModel().getIndividual(statement.getSubject().getURI());
+                        map.put("name", subjectName);
+                        if (subjIndividual != null) {
+                            // 从rdf:type语句获取类型
+                            String subjCategory = "未知类型";
+                            StmtIterator subjTypeStmts = subjIndividual.listProperties(RDF.type);
+                            while (subjTypeStmts.hasNext()) {
+                                Statement typeStmt = subjTypeStmts.next();
+                                if (typeStmt.getObject().isResource()) {
+                                    String typeName = typeStmt.getObject().asResource().getLocalName();
+                                    if (!typeName.equals("NamedIndividual")) {
+                                        subjCategory = typeName;
+                                        break;
+                                    }
+                                }
+                            }
+                            map.put("category", subjCategory);
+                        } else {
+                            map.put("category", "未知类型");
+                        }
+                        duplicateList.add(subjectName);
+                        list.add(map);
+                    }
+                }
+            }
+
             return list;
         } else {
             // error

@@ -5,13 +5,86 @@
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
     xmlns:革命文物="http://www.owl-ontologies.com/RevolutionaryRelics.owl#"
+    xmlns:北京革命="http://www.owl-ontologies.com/BeijingRevolution.owl#"
     xmlns="http://www.owl-ontologies.com/BeijingRevolution.owl#"
   xml:base="http://www.owl-ontologies.com/culture.owl">
   
   <owl:Ontology rdf:about=""/>
   
   <!-- ==================== 顶层类定义 ==================== -->
-  
+
+  <!-- 北京香山红色文化主类 -->
+  <owl:Class rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#北京香山红色文化">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">北京香山红色文化</rdfs:label>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">以香山革命纪念地为核心的特色红色地域文化</rdfs:comment>
+  </owl:Class>
+
+  <!-- 时间类 -->
+  <owl:Class rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#时间">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">时间</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#北京香山红色文化"/>
+  </owl:Class>
+
+  <!-- 时间点类 -->
+  <owl:Class rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#时间点">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">时间点</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#时间"/>
+  </owl:Class>
+
+  <!-- 时间段类 -->
+  <owl:Class rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#时间段">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">时间段</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#时间"/>
+  </owl:Class>
+
+  <!-- 文化遗存类 -->
+  <owl:Class rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#文化遗存">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">文化遗存</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#北京香山红色文化"/>
+  </owl:Class>
+
+  <!-- 人造遗存类 -->
+  <owl:Class rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#人造遗存">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">人造遗存</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#文化遗存"/>
+  </owl:Class>
+
+  <!-- 自然遗存类 -->
+  <owl:Class rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#自然遗存">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">自然遗存</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#文化遗存"/>
+  </owl:Class>
+
+  <!-- 相关遗址类 -->
+  <owl:Class rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#相关遗址">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">相关遗址</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#人造遗存"/>
+  </owl:Class>
+
+  <!-- 相关遗物类 -->
+  <owl:Class rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#相关遗物">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">相关遗物</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#人造遗存"/>
+  </owl:Class>
+
+  <!-- 建筑建造类 -->
+  <owl:Class rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#建筑建造">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">建筑建造</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#人造遗存"/>
+  </owl:Class>
+
+  <!-- 历史事件类 -->
+  <owl:Class rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#历史事件">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">历史事件</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#北京香山红色文化"/>
+  </owl:Class>
+
+  <!-- 相关人物类 -->
+  <owl:Class rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#人物">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">相关人物</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#北京香山红色文化"/>
+  </owl:Class>
+
   <!-- 革命文物主类 -->
   <owl:Class rdf:about="http://www.owl-ontologies.com/RevolutionaryRelics.owl#革命文物">
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">革命文物</rdfs:label>
@@ -134,8 +207,93 @@
   </owl:Class>
   
   <!-- ==================== 属性定义 ==================== -->
-  
-  <!-- 对象属性 -->
+
+  <!-- 北京香山红色文化对象属性 -->
+  <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#发生在">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">发生在</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#历史事件"/>
+    <rdfs:range rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#相关遗址"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#作者">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">作者</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#相关遗物"/>
+    <rdfs:range rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#人物"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#位于">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">位于</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#相关遗物"/>
+    <rdfs:range rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#相关遗址"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#包含">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">包含</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#相关遗址"/>
+    <rdfs:range rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#相关遗物"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#相关事件">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">相关事件</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#人物"/>
+    <rdfs:range rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#历史事件"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#相关遗物">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">相关遗物</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#人物"/>
+    <rdfs:range rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#相关遗物"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#相关人物">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">相关人物</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#相关遗物"/>
+    <rdfs:range rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#人物"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#相关遗址">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">相关遗址</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#自然遗存"/>
+    <rdfs:range rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#相关遗址"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#相关遗存">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">相关遗存</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#相关遗址"/>
+    <rdfs:range rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#自然遗存"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#相关遗物_反向">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">相关遗物</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#历史事件"/>
+    <rdfs:range rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#人物"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#相关遗址_历史事件">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">相关遗址</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#历史事件"/>
+    <rdfs:range rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#相关遗址"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#相关遗址_建筑建造">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">相关遗址</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#建筑建造"/>
+    <rdfs:range rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#相关遗址"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#相关遗址_相关遗存">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">相关遗址</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#相关遗存"/>
+    <rdfs:range rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#相关遗址"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#相关遗址_革命纪念地">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">相关遗址</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#革命纪念地"/>
+    <rdfs:range rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#相关遗址"/>
+  </owl:ObjectProperty>
+
+  <!-- 革命文物对象属性 -->
   <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/RevolutionaryRelics.owl#属于批次">
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">属于批次</rdfs:label>
     <rdfs:domain rdf:resource="http://www.owl-ontologies.com/RevolutionaryRelics.owl#革命文物"/>
@@ -562,5 +720,285 @@
     <革命文物:所属时期 rdf:resource="http://www.owl-ontologies.com/RevolutionaryRelics.owl#新民主主义革命时期"/>
     <革命文物:位于片区 rdf:resource="http://www.owl-ontologies.com/RevolutionaryRelics.owl#抗日战争片区"/>
   </owl:NamedIndividual>
-  
+
+  <!-- ==================== 北京香山红色文化实例 ==================== -->
+
+  <!-- 时间点实例：1949年 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#1949年">
+    <rdf:type rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#时间点"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1949年</rdfs:label>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">中共中央进驻香山的重要年份</rdfs:comment>
+  </owl:NamedIndividual>
+
+  <!-- 1949年3月25日：毛泽东同志率领中共中央和中国人民解放军总部进驻北京香山 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#1949年3月25日进驻香山">
+    <rdf:type rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#历史事件"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1949年3月25日：毛泽东同志率领中共中央和中国人民解放军总部进驻北京香山</rdfs:label>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1949年3月25日，毛泽东同志率领中共中央和中国人民解放军总部进驻北京香山，标志着中国革命重心从农村转向城市</rdfs:comment>
+  </owl:NamedIndividual>
+
+  <!-- 1949年6月19日：毛泽东同志写给宋庆龄的亲笔信 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#毛泽东致宋庆龄信">
+    <rdf:type rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#相关遗物"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1949年6月19日：毛泽东同志写给宋庆龄的亲笔信</rdfs:label>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">庆龄先生：重庆违教，忽近四年。仰望之诚，与日俱积。兹者全国革命胜利在即，建设大计，亟待商筹，特派邓颖超同志趋前致候，专诚欢迎先生北上。敬希命驾莅平，以便就近请教，至祈勿却为盼！专此敬颂大安！毛泽东 一九四九年六月十九日</rdfs:comment>
+  </owl:NamedIndividual>
+
+  <!-- 1949年6月21日：周恩来同志写给宋庆龄的亲笔信 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#周恩来致宋庆龄信">
+    <rdf:type rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#相关遗物"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1949年6月21日：周恩来同志写给宋庆龄的亲笔信</rdfs:label>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">庆龄先生：沪滨告别，瞬近三年。每当蒋贼肆虐之际，辄以先生安全为念。今幸解放迅速，先生从此永脱险境，诚人民之大喜，私心亦为之大慰。现全国胜利在即，新中国建设有待于先生指教者正多。敢藉颖超专诚迎迓之便，谨陈渴望先生北上之情。敬希早日命驾，实为至幸。耑上。敬颂大安 周恩来 一九四九.六.廿一</rdfs:comment>
+  </owl:NamedIndividual>
+
+  <!-- 相关遗址实例 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#香山公园">
+    <rdf:type rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#相关遗址"/>
+    <rdf:type rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#相关遗物"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">香山公园</rdfs:label>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">香山公园位于北京市海淀区，是一座具有山林特色的皇家园林，也是中共中央进京后的驻地。双清别墅和来青轩等革命旧址位于园内，是重要的红色文化遗址。</rdfs:comment>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#香山革命纪念地">
+    <rdf:type rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#相关遗址"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">香山革命纪念地</rdfs:label>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">香山革命纪念地包括双清别墅、来青轩等多处革命旧址，是1949年中共中央所在地，见证了中国革命走向全国胜利的伟大历程。</rdfs:comment>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#香山故居">
+    <rdf:type rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#相关遗址"/>
+    <rdf:type rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#相关遗物"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">香山故居</rdfs:label>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">香山故居是中共中央领导人在香山期间的居住地，包括双清别墅、来青轩等多处革命旧址，见证了中国革命走向全国胜利的伟大历程。</rdfs:comment>
+  </owl:NamedIndividual>
+
+  <!-- 相关遗物实例 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#双清别墅毛泽东办公旧址">
+    <rdf:type rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#相关遗物"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">双清别墅毛泽东办公旧址</rdfs:label>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">毛泽东同志在双清别墅工作和生活的地方，见证了渡江战役指挥、南京解放等重大历史事件。</rdfs:comment>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#来青轩周恩来办公旧址">
+    <rdf:type rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#相关遗物"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">来青轩周恩来办公旧址</rdfs:label>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">周恩来同志在来青轩工作和生活的地方，参与筹建新中国各项重要工作。</rdfs:comment>
+  </owl:NamedIndividual>
+
+  <!-- 建筑建造实例 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#香山革命纪念馆">
+    <rdf:type rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#建筑建造"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">香山革命纪念馆</rdfs:label>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">香山革命纪念馆是为纪念中共中央在香山时期的革命历史而建设的专题纪念馆，展示了"为新中国奠基——中共中央在香山"主题展览。</rdfs:comment>
+  </owl:NamedIndividual>
+
+  <!-- 自然遗存实例 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#香山自然景观">
+    <rdf:type rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#自然遗存"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">香山自然景观</rdfs:label>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">香山自然景观包括香山的红叶、古树、山泉等自然景观，是香山公园的重要组成部分，也是红色文化的重要载体。</rdfs:comment>
+  </owl:NamedIndividual>
+
+  <!-- 相关人物实例 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#毛泽东_香山">
+    <rdf:type rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#人物"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">毛泽东</rdfs:label>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">中国共产党、中国人民解放军和中华人民共和国的主要缔造者，1949年在香山指挥渡江战役，筹备新政协会议，筹建新中国。</rdfs:comment>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#周恩来_香山">
+    <rdf:type rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#人物"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">周恩来</rdfs:label>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">伟大的无产阶级革命家，在香山期间参与筹建新中国各项重要工作，写信邀请宋庆龄北上参加新政协会议。</rdfs:comment>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#宋庆龄">
+    <rdf:type rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#人物"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">宋庆龄</rdfs:label>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">伟大的爱国主义、民主主义、国际主义和共产主义战士，收到毛泽东、周恩来亲笔信后北上参加新政协会议。</rdfs:comment>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#邓颖超">
+    <rdf:type rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#人物"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">邓颖超</rdfs:label>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">伟大的无产阶级革命家，受毛泽东委托前往上海迎接宋庆龄北上。</rdfs:comment>
+  </owl:NamedIndividual>
+
+  <!-- ==================== 实例关系 ==================== -->
+
+  <!-- 1949年3月25日进驻香山 - 发生在 - 香山公园 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#1949年3月25日进驻香山">
+    <北京革命:发生在 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#香山公园"/>
+  </owl:NamedIndividual>
+
+  <!-- 毛泽东致宋庆龄信 - 作者 - 毛泽东 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#毛泽东致宋庆龄信">
+    <北京革命:作者 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#毛泽东_香山"/>
+  </owl:NamedIndividual>
+
+  <!-- 周恩来致宋庆龄信 - 作者 - 周恩来 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#周恩来致宋庆龄信">
+    <北京革命:作者 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#周恩来_香山"/>
+  </owl:NamedIndividual>
+
+  <!-- 香山公园 - 包含 - 双清别墅毛泽东办公旧址 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#香山公园">
+    <北京革命:包含 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#双清别墅毛泽东办公旧址"/>
+    <北京革命:包含 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#来青轩周恩来办公旧址"/>
+  </owl:NamedIndividual>
+
+  <!-- 双清别墅毛泽东办公旧址 - 位于 - 香山公园 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#双清别墅毛泽东办公旧址">
+    <北京革命:位于 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#香山公园"/>
+  </owl:NamedIndividual>
+
+  <!-- 来青轩周恩来办公旧址 - 位于 - 香山公园 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#来青轩周恩来办公旧址">
+    <北京革命:位于 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#香山公园"/>
+  </owl:NamedIndividual>
+
+  <!-- 香山故居 - 位于 - 香山公园 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#香山故居">
+    <北京革命:位于 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#香山公园"/>
+  </owl:NamedIndividual>
+
+  <!-- 香山公园 - 作为相关遗物 - 位于 - 香山公园 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#香山公园">
+    <北京革命:位于 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#香山公园"/>
+  </owl:NamedIndividual>
+
+  <!-- 毛泽东 - 相关事件 - 1949年3月25日进驻香山 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#毛泽东_香山">
+    <北京革命:相关事件 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#1949年3月25日进驻香山"/>
+  </owl:NamedIndividual>
+
+  <!-- 周恩来 - 相关事件 - 周恩来致宋庆龄信 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#周恩来_香山">
+    <北京革命:相关事件 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#周恩来致宋庆龄信"/>
+  </owl:NamedIndividual>
+
+  <!-- 宋庆龄 - 相关事件 - 毛泽东致宋庆龄信 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#宋庆龄">
+    <北京革命:相关事件 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#毛泽东致宋庆龄信"/>
+    <北京革命:相关事件 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#周恩来致宋庆龄信"/>
+  </owl:NamedIndividual>
+
+  <!-- 邓颖超 - 相关事件 - 毛泽东致宋庆龄信 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#邓颖超">
+    <北京革命:相关事件 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#毛泽东致宋庆龄信"/>
+  </owl:NamedIndividual>
+
+  <!-- 香山革命纪念馆 - 位于 - 香山公园 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#香山革命纪念馆">
+    <北京革命:位于 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#香山公园"/>
+  </owl:NamedIndividual>
+
+  <!-- 香山自然景观 - 位于 - 香山公园 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#香山自然景观">
+    <北京革命:位于 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#香山公园"/>
+  </owl:NamedIndividual>
+
+  <!-- 香山公园 - 包含 - 香山革命纪念馆 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#香山公园">
+    <北京革命:包含 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#香山革命纪念馆"/>
+    <北京革命:包含 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#香山自然景观"/>
+  </owl:NamedIndividual>
+
+  <!-- 毛泽东 - 相关遗物 - 双清别墅毛泽东办公旧址 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#毛泽东_香山">
+    <北京革命:相关遗物 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#双清别墅毛泽东办公旧址"/>
+  </owl:NamedIndividual>
+
+  <!-- 周恩来 - 相关遗物 - 来青轩周恩来办公旧址 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#周恩来_香山">
+    <北京革命:相关遗物 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#来青轩周恩来办公旧址"/>
+  </owl:NamedIndividual>
+
+  <!-- 双清别墅毛泽东办公旧址 - 相关人物 - 毛泽东 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#双清别墅毛泽东办公旧址">
+    <北京革命:相关人物 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#毛泽东_香山"/>
+  </owl:NamedIndividual>
+
+  <!-- 来青轩周恩来办公旧址 - 相关人物 - 周恩来 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#来青轩周恩来办公旧址">
+    <北京革命:相关人物 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#周恩来_香山"/>
+  </owl:NamedIndividual>
+
+  <!-- 香山故居 - 包含 - 双清别墅毛泽东办公旧址 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#香山故居">
+    <北京革命:包含 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#双清别墅毛泽东办公旧址"/>
+    <北京革命:包含 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#来青轩周恩来办公旧址"/>
+  </owl:NamedIndividual>
+
+  <!-- 双清别墅毛泽东办公旧址 - 位于 - 香山故居 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#双清别墅毛泽东办公旧址">
+    <北京革命:位于 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#香山故居"/>
+  </owl:NamedIndividual>
+
+  <!-- 来青轩周恩来办公旧址 - 位于 - 香山故居 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#来青轩周恩来办公旧址">
+    <北京革命:位于 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#香山故居"/>
+  </owl:NamedIndividual>
+
+  <!-- 香山自然景观 - 相关遗址 - 香山公园 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#香山自然景观">
+    <北京革命:相关遗址 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#香山公园"/>
+  </owl:NamedIndividual>
+
+  <!-- 香山公园 - 相关遗存 - 香山自然景观 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#香山公园">
+    <北京革命:相关遗存 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#香山自然景观"/>
+  </owl:NamedIndividual>
+
+  <!-- 1949年3月25日进驻香山 - 相关人物 - 毛泽东 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#1949年3月25日进驻香山">
+    <北京革命:相关人物 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#毛泽东_香山"/>
+    <北京革命:相关遗址_历史事件 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#香山公园"/>
+  </owl:NamedIndividual>
+
+  <!-- 毛泽东致宋庆龄信 - 相关人物 - 宋庆龄 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#毛泽东致宋庆龄信">
+    <北京革命:相关人物 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#宋庆龄"/>
+    <北京革命:相关人物 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#毛泽东_香山"/>
+  </owl:NamedIndividual>
+
+  <!-- 周恩来致宋庆龄信 - 相关人物 - 宋庆龄 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#周恩来致宋庆龄信">
+    <北京革命:相关人物 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#宋庆龄"/>
+    <北京革命:相关人物 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#周恩来_香山"/>
+  </owl:NamedIndividual>
+
+  <!-- 香山革命纪念馆 - 相关遗址 - 香山公园 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#香山革命纪念馆">
+    <北京革命:相关遗址_建筑建造 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#香山公园"/>
+  </owl:NamedIndividual>
+
+  <!-- 香山故居 - 相关遗址 - 香山公园 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#香山故居">
+    <北京革命:相关遗址_相关遗存 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#香山公园"/>
+  </owl:NamedIndividual>
+
+  <!-- 香山革命纪念地 - 相关遗址 - 香山公园 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#香山革命纪念地">
+    <北京革命:相关遗址_革命纪念地 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#香山公园"/>
+    <北京革命:包含 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#双清别墅毛泽东办公旧址"/>
+    <北京革命:包含 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#来青轩周恩来办公旧址"/>
+    <北京革命:包含 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#香山革命纪念馆"/>
+  </owl:NamedIndividual>
+
+  <!-- 双清别墅毛泽东办公旧址 - 位于 - 香山革命纪念地 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#双清别墅毛泽东办公旧址">
+    <北京革命:位于 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#香山革命纪念地"/>
+  </owl:NamedIndividual>
+
+  <!-- 来青轩周恩来办公旧址 - 位于 - 香山革命纪念地 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#来青轩周恩来办公旧址">
+    <北京革命:位于 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#香山革命纪念地"/>
+  </owl:NamedIndividual>
+
+  <!-- 香山革命纪念馆 - 位于 - 香山革命纪念地 -->
+  <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/BeijingRevolution.owl#香山革命纪念馆">
+    <北京革命:位于 rdf:resource="http://www.owl-ontologies.com/BeijingRevolution.owl#香山革命纪念地"/>
+  </owl:NamedIndividual>
+
 </rdf:RDF>
